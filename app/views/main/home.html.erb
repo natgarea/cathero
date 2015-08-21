@@ -1,0 +1,78 @@
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-8">
+                <img class="img-responsive img-center" src="/assets/logo_main_page.png" alt="Cataloguing Hero logo">
+                <% @error %>
+            </div>
+            <div class="col-sm-4">
+                <h2>Leaderboard</h2>
+                <% @users.each do |user| %>
+                <table>
+                    <td>
+                    <tr><%= user.username %></tr>
+                    <tr><%= user.score %></tr>
+                    </td>
+                </table>
+                <% end %>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <div class="row">
+                <% if current_user %> 
+                <div class="col-sm-8">
+                <h1>Welcome <%= current_user.username %>!</h1>
+                <p>Continue where you left off or take a new course.</p>
+                </div>
+                <% else %>
+                <div class="col-sm-4">
+                <h3>Sign up</h3>
+                    <%= form_for(@user) do |f| %>
+                    <%= f.text_field :username, :placeholder => "Username" %>
+                    <%= f.email_field :email, :placeholder => "Email" %>
+                    <%= f.password_field :password, :placeholder => "Password" %>
+                    <%= f.submit "Sign up", class: "btn-submit" %>
+                    <% end %>
+                </div>
+                <div class="col-sm-4">
+                    <h3>Log in</h3>
+                    <%= form_for(:session, url: login_path) do |f| %> 
+                    <%= f.email_field :email, :placeholder => "Email" %> 
+                    <%= f.password_field :password, :placeholder => "Password" %> 
+                    <%= f.submit "Log in", class: "btn-submit" %>
+                    <% end %>
+                </div>
+                <% end %>
+            <div class="col-sm-4">
+                <h3>If you are experiencing any problems, let us know.</h3>
+                    <%= form_for(:session, url: login_path) do |f| %> 
+                    <%= f.email_field :email, :placeholder => "Email" %> 
+                    <%= f.password_field :password, :placeholder => "Password" %> 
+                    <%= f.submit "Log in", class: "btn-submit" %>
+                    <% end %>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <div class="row">
+            <% @courses.each do |course| %>
+                <div class="col-sm-4">
+                    <img src="<%= course.logo %>" alt="<%= course.title %>"/>
+                    <h2><%= course.title %></h2>
+                    <p><%= course.description %>.</p>
+                    <p><%= course.duration %></p>
+                    <p><%= course.level %></p>
+                    <%= form_for(@user, url: join_course_path) do |f| %>
+                    <%= hidden_field_tag(:course_id, course.id) %>
+                    <%= f.submit "Join", class: "btn btn-default btn-lg" %>
+                    <% end %>
+                </div>
+            <% end %>
+            
+        </div>

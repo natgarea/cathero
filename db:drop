@@ -1,0 +1,28 @@
+-- create_table("badges", {:force=>:cascade})
+   -> 0.0974s
+-- create_table("courses", {:force=>:cascade})
+   -> 0.0784s
+-- create_table("courses_users", {:id=>false, :force=>:cascade})
+   -> 0.0898s
+-- create_table("lessons", {:force=>:cascade})
+   -> 0.0892s
+-- create_table("lessons_users", {:id=>false, :force=>:cascade})
+   -> 0.0785s
+-- create_table("users", {:force=>:cascade})
+   -> 0.0783s
+-- initialize_schema_migrations_table()
+   -> 0.3249s
+-- create_table("badges", {:force=>:cascade})
+   -> 0.0984s
+-- create_table("courses", {:force=>:cascade})
+   -> 0.0893s
+-- create_table("courses_users", {:id=>false, :force=>:cascade})
+   -> 0.0784s
+-- create_table("lessons", {:force=>:cascade})
+   -> 0.0896s
+-- create_table("lessons_users", {:id=>false, :force=>:cascade})
+   -> 0.0784s
+-- create_table("users", {:force=>:cascade})
+   -> 0.0784s
+-- initialize_schema_migrations_table()
+   -> 0.2582s
