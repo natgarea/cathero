@@ -8,7 +8,9 @@ class CreateLessons < ActiveRecord::Migration
     	t.text :hint
     	t.integer :points
     	t.integer :order
-      	t.timestamps null: false
+      t.integer :course_id
+      t.integer :badge_id
+      t.timestamps null: false
     end
   end
 end

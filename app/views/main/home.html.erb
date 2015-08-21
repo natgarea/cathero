@@ -8,14 +8,14 @@
             </div>
             <div class="col-sm-4">
                 <h2>Leaderboard</h2>
+                <table class="leaderboard">
                 <% @users.each do |user| %>
-                <table>
-                    <td>
-                    <tr><%= user.username %></tr>
-                    <tr><%= user.score %></tr>
-                    </td>
-                </table>
+                    <tr>
+                    <td><%= user.username %></td>
+                    <td><%= user.score %></td>
+                    </tr>
                 <% end %>
+                </table>
             </div>
         </div>
         <!-- /.row -->
@@ -27,6 +27,9 @@
                 <div class="col-sm-8">
                 <h1>Welcome <%= current_user.username %>!</h1>
                 <p>Continue where you left off or take a new course.</p>
+                <% if @current_lesson %>
+                <%= link_to "Continue where you left off", lesson_path(@current_lesson), class: "btn btn-default btn-lg" %>
+                <% end %>
                 </div>
                 <% else %>
                 <div class="col-sm-4">
@@ -49,25 +52,36 @@
                 <% end %>
             <div class="col-sm-4">
                 <h3>If you are experiencing any problems, let us know.</h3>
-                    <%= form_for(:session, url: login_path) do |f| %> 
-                    <%= f.email_field :email, :placeholder => "Email" %> 
-                    <%= f.password_field :password, :placeholder => "Password" %> 
-                    <%= f.submit "Log in", class: "btn-submit" %>
-                    <% end %>
+                        <!-- Form -->
+        <form id="contact-form" action="/" method="post">
+            <div>
+                <label>
+                    <input placeholder="Email" type="email" required>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <textarea placeholder="Message" required></textarea>
+                </label>
+            </div>
+            <div>
+                <button name="submit" type="submit" id="contact-submit">Send Email</button>
+            </div>
+        </form>
+        <!-- /Form -->
             </div>
         </div>
         <!-- /.row -->
 
         <hr>
 
-        <div class="row">
+        <div class="row text-center">
+            <h2>What challenge would you like to take today?</h2></br></br>
             <% @courses.each do |course| %>
-                <div class="col-sm-4">
-                    <img src="<%= course.logo %>" alt="<%= course.title %>"/>
+                <div class="col-lg-4 col-sm-6 text-center">
+                    <img src="<%= course.logo %>" alt="<%= course.title %>" class="img-circle img-responsive img-center"/>
                     <h2><%= course.title %></h2>
-                    <p><%= course.description %>.</p>
-                    <p><%= course.duration %></p>
-                    <p><%= course.level %></p>
+                    <p><%= course.description %>. | <%= course.duration %> | <%= course.level %></p>
                     <%= form_for(@user, url: join_course_path) do |f| %>
                     <%= hidden_field_tag(:course_id, course.id) %>
                     <%= f.submit "Join", class: "btn btn-default btn-lg" %>

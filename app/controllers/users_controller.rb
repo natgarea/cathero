@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
+		@achievements = User.find(params[:id]).badges
 	end
 
 	def index

@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804200012) do
+ActiveRecord::Schema.define(version: 20150808122511) do
+
+  create_table "achievements", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "badge_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -35,8 +42,16 @@ ActiveRecord::Schema.define(version: 20150804200012) do
     t.string   "duration",    limit: 255
     t.string   "level",       limit: 255
     t.string   "logo",        limit: 255
+    t.integer  "badge_id",    limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+  end
+
+  create_table "lesson_registers", id: false, force: :cascade do |t|
+    t.integer  "user_id",    limit: 4, null: false
+    t.integer  "lesson_id",  limit: 4, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -47,15 +62,10 @@ ActiveRecord::Schema.define(version: 20150804200012) do
     t.text     "hint",       limit: 65535
     t.integer  "points",     limit: 4
     t.integer  "order",      limit: 4
+    t.integer  "course_id",  limit: 4
+    t.integer  "badge_id",   limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-  end
-
-  create_table "lessons_users", id: false, force: :cascade do |t|
-    t.integer  "user_id",    limit: 4, null: false
-    t.integer  "lesson_id",  limit: 4, null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
   end
 
   create_table "users", force: :cascade do |t|

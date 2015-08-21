@@ -1,0 +1,41 @@
+<script type="text/javascript">
+function showHint() {
+    var hintSpan = document.getElementById("hint-span");
+    hintSpan.style.display = 'block';
+
+    var usedHintInput = document.getElementById("used_hint");
+    usedHintInput.value = true;
+}
+</script>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+                <div class="col-sm-4 text-justify">
+                    <h1><%= @lesson.title %></h1>
+                    <%= @lesson.content.html_safe %>
+                </div>
+            <div class="col-sm-8 text-justify">
+                <%= @lesson.activity.html_safe %>
+            </div>
+        </div>
+            <!-- /.row -->
+        <div class="row">
+                <div class="col-sm-4">
+                    <a onclick="javascript:showHint()">Show hint</a>
+                    <span style="display:none" id="hint-span">
+                        <%= @lesson.hint.html_safe %>
+                    </span>
+                </div>
+            <div class="col-sm-6 text-center">
+                <%= form_tag(controller: 'lessons', action: 'check_solution', method: 'post') do %>
+                <%= hidden_field_tag(:lesson_id, @lesson.id) %>
+                <%= hidden_field_tag(:used_hint, false) %>
+                <p id="error"><%= flash[:error] %></p>
+                <%= text_field_tag :answer, "Type here your answer" %>
+                <%= submit_tag("Submit", class: "btn btn-default btn-lg") %>
+                <% end %>
+            </div>
+        </div>
+            <!-- /.row -->
+    </div>

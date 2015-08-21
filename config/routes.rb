@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   get 'user/:id' => 'users#show' #change name
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
-  get 'lesson' => 'lessons#show'
-  #get 'lesson/:id' => 'lessons#show'
   post 'join_course' => 'course_register#join_course'
   get 'courses' => 'courses#index'
+  get 'lesson/:id/' => 'lessons#show', as: 'lesson'
+  post 'check_solution' => 'lessons#check_solution'
 
 
   resources :users

@@ -26,3 +26,18 @@ body {
 footer {
     margin: 50px 0;
 }
+
+.badges {
+	display: inline;
+}
+
+.leaderboard {
+	width: 80%;
+	text-align: center;
+}
+
+td {
+  padding: 5px 10px;
+  font-size: 1.25em;
+}
+
