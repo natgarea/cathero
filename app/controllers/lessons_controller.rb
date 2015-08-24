@@ -41,7 +41,12 @@ class LessonsController < ApplicationController
 		mark_lesson_as_completed(current_lesson)
 
 		if !used_hint
-			current_user.score += 5
+			if current_user.score.nil?
+				current_user.score = 5
+			else
+			 	current_user.score += 5
+			end
+			
 		end
 
 		if current_lesson.badge != nil
